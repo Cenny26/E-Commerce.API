@@ -21,7 +21,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerce.Persistence", "sr
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerce.API", "src\Presentation\ECommerce.API\ECommerce.API.csproj", "{E5EF0F7D-2BB7-43B1-B16D-67445381359D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ECommerce.Mapper", "src\Core\ECommerce.Mapper\ECommerce.Mapper.csproj", "{B17E66E2-632F-424A-AEB7-962E17DA2E3F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ECommerce.Mapper", "src\Core\ECommerce.Mapper\ECommerce.Mapper.csproj", "{B17E66E2-632F-424A-AEB7-962E17DA2E3F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
