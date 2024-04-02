@@ -1,5 +1,9 @@
-﻿using ECommerce.Application.Exceptions;
+﻿using ECommerce.Application.Behaviors;
+using ECommerce.Application.Exceptions;
+using FluentValidation;
+using MediatR;
 using Microsoft.Extensions.DependencyInjection;
+using System.Globalization;
 using System.Reflection;
 
 namespace ECommerce.Application
@@ -16,6 +20,11 @@ namespace ECommerce.Application
             });
 
             services.AddTransient<ExceptionMiddleware>();
+
+            services.AddValidatorsFromAssembly(assembly);
+            ValidatorOptions.Global.LanguageManager.Culture = new CultureInfo("en-US");
+
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(FluentValidationBehavior<,>));
         }
     }
 }

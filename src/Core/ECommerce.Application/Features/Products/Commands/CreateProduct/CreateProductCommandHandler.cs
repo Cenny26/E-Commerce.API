@@ -4,7 +4,7 @@ using MediatR;
 
 namespace ECommerce.Application.Features.Products.Commands.CreateProduct
 {
-    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommandRequest>
+    public class CreateProductCommandHandler : IRequestHandler<CreateProductCommandRequest, Unit>
     {
         private readonly IUnitOfWork _unitOfWork;
         public CreateProductCommandHandler(IUnitOfWork unitOfWork)
@@ -12,7 +12,7 @@ namespace ECommerce.Application.Features.Products.Commands.CreateProduct
             _unitOfWork = unitOfWork;
         }
 
-        public async Task Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
+        public async Task<Unit> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
         {
             Product product = new Product(request.Title, request.Description, request.Price, request.Discount, request.BrandId);
 
@@ -28,6 +28,8 @@ namespace ECommerce.Application.Features.Products.Commands.CreateProduct
 
                 await _unitOfWork.SaveAsync();
             }
+
+            return Unit.Value;
         }
     }
 }
