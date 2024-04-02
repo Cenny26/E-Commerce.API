@@ -1,4 +1,5 @@
 ﻿using ECommerce.Application.DTOs;
+using ECommerce.Application.Exceptions;
 using ECommerce.Application.Interfaces.AutoMappers;
 using ECommerce.Application.Interfaces.UnitOfWorks;
 using ECommerce.Domain.Entities;
@@ -27,6 +28,7 @@ namespace ECommerce.Application.Features.Products.Queries.GetAllProducts
                 item.Price -= (item.Price * item.Discount / 100);
 
             return map;
+            //throw new Exception("GetAllProductsQueryHandler service tested on exception.");
         }
     }
 }

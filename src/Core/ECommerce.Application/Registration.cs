@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using ECommerce.Application.Exceptions;
+using Microsoft.Extensions.DependencyInjection;
 using System.Reflection;
 
 namespace ECommerce.Application
@@ -13,6 +14,8 @@ namespace ECommerce.Application
             {
                 cfg.RegisterServicesFromAssemblies(assembly);
             });
+
+            services.AddTransient<ExceptionMiddleware>();
         }
     }
 }
