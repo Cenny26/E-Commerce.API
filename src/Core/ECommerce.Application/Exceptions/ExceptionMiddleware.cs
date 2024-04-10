@@ -34,8 +34,7 @@ namespace ECommerce.Application.Exceptions
 
             List<string> errors = new List<string>()
             {
-                $"Error message: {exception.Message}",
-                $"Message description: {exception.InnerException?.ToString()}"
+                $"Error message: {exception.Message}"
             };
 
             return context.Response.WriteAsync(new ExceptionModel()
