@@ -1,4 +1,5 @@
-﻿using ECommerce.Application.Features.Auth.Commands.Register;
+﻿using ECommerce.Application.Features.Auth.Commands.Login;
+using ECommerce.Application.Features.Auth.Commands.Register;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,6 +20,13 @@ namespace ECommerce.API.Controllers
         {
             await _mediator.Send(request);
             return StatusCode(StatusCodes.Status201Created);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Login(LoginCommandRequest request)
+        {
+            var response = await _mediator.Send(request);
+            return StatusCode(StatusCodes.Status200OK, response);
         }
     }
 }
