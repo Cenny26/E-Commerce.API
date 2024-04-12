@@ -1,6 +1,8 @@
 ﻿using ECommerce.Application.Features.Auth.Commands.Login;
 using ECommerce.Application.Features.Auth.Commands.RefreshToken;
 using ECommerce.Application.Features.Auth.Commands.Register;
+using ECommerce.Application.Features.Auth.Commands.Revoke;
+using ECommerce.Application.Features.Auth.Commands.RevokeAll;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -35,6 +37,20 @@ namespace ECommerce.API.Controllers
         {
             var response = await _mediator.Send(request);
             return StatusCode(StatusCodes.Status200OK, response);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Revoke(RevokeCommandRequest request)
+        {
+            await _mediator.Send(request);
+            return StatusCode(StatusCodes.Status200OK);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RevokeAll()
+        {
+            await _mediator.Send(new RevokeAllCommandRequest());
+            return StatusCode(StatusCodes.Status200OK);
         }
     }
 }
