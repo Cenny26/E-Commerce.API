@@ -3,7 +3,7 @@ using AutoMapper.Internal;
 
 namespace ECommerce.Mapper.AutoMappers
 {
-    public class Mapper : ECommerce.Application.Interfaces.AutoMappers.IMapper
+    public class Mapper : Application.Interfaces.AutoMappers.IMapper
     {
         private IMapper _mapperContainer;
         public static List<TypePair> typePairs = new List<TypePair>();
