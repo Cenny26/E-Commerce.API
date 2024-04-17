@@ -1,4 +1,6 @@
-﻿using ECommerce.Application.Interfaces.Tokens;
+﻿using ECommerce.Application.Interfaces.RedisCache;
+using ECommerce.Application.Interfaces.Tokens;
+using ECommerce.Infrastructure.RedisCache;
 using ECommerce.Infrastructure.Tokens;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Configuration;
@@ -13,8 +15,10 @@ namespace ECommerce.Infrastructure
         public static void AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
             services.Configure<TokenSettings>(configuration.GetSection("JWT"));
+            services.Configure<RedisCacheSettings>(configuration.GetSection("RedisCacheSettings"));
 
             services.AddTransient<ITokenService, TokenService>();
+            services.AddTransient<IRedisCacheService, RedisCacheService>();
 
             services.AddAuthentication(opt =>
             {
@@ -34,6 +38,11 @@ namespace ECommerce.Infrastructure
                     ValidAudience = configuration["JWT:Audience"],
                     ClockSkew = TimeSpan.Zero
                 };
+            });
+            services.AddStackExchangeRedisCache(opt =>
+            {
+                opt.Configuration = configuration["RedisCacheSettings:ConnectionString"];
+                opt.InstanceName = configuration["RedisCacheSettings:InstanceName"];
             });
         }
     }
