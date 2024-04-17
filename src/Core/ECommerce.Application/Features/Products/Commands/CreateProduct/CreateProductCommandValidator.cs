@@ -15,21 +15,24 @@ namespace ECommerce.Application.Features.Products.Commands.CreateProduct
                 .WithName("Description");
 
             RuleFor(x => x.BrandId)
-                .GreaterThan(0)
-                .WithName("Brand identity");
+                .Must(id => int.TryParse(id.ToString(), out int parsedId) && parsedId > 0)
+                .WithMessage("Id must be a positive integer.")
+                .WithName("Brand's identity");
 
             RuleFor(x => x.Price)
                 .GreaterThan(0)
                 .WithName("Price");
 
             RuleFor(x => x.Discount)
-                .GreaterThanOrEqualTo(0)
+                .InclusiveBetween(0, 100)
                 .WithName("Discount");
 
             RuleFor(x => x.CategoryIds)
                 .NotEmpty()
-                .Must(categories => categories.Any())
-                .WithName("Category identity");
+                .WithMessage("At least one category must be selected.")
+                .Must(categories => categories.All(id => int.TryParse(id.ToString(), out int parsedId) && parsedId > 0))
+                .WithMessage("Category's identity must be a positive integer.")
+                .WithName("Categories' identity");
         }
     }
 }

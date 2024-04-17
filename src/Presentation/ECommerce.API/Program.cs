@@ -1,8 +1,8 @@
 using ECommerce.Application;
-using ECommerce.Infrastructure;
-using ECommerce.Persistence;
-using ECommerce.Mapper;
 using ECommerce.Application.Exceptions;
+using ECommerce.Infrastructure;
+using ECommerce.Mapper;
+using ECommerce.Persistence;
 using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);

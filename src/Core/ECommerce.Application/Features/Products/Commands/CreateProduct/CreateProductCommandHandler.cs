@@ -5,6 +5,7 @@ using ECommerce.Application.Interfaces.UnitOfWorks;
 using ECommerce.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Http;
+using Microsoft.EntityFrameworkCore;
 
 namespace ECommerce.Application.Features.Products.Commands.CreateProduct
 {
@@ -18,8 +19,12 @@ namespace ECommerce.Application.Features.Products.Commands.CreateProduct
 
         public async Task<Unit> Handle(CreateProductCommandRequest request, CancellationToken cancellationToken)
         {
-            IList<Product> products = await _unitOfWork.GetReadRepository<Product>().GetAllAsync();
-            await _productRules.ProductTitleMustNotBeSame(products, request.Title);
+            IList<Product> products = await _unitOfWork.GetReadRepository<Product>().GetAllAsync(include: x => x.Include(b => b.Brand).Include(p => p.ProductCategories));
+
+            await _productRules.EnsureBrandExists(brandId: request.BrandId);
+            await _productRules.EnsureCategoriesExist(categoryIds: request.CategoryIds);
+            await _productRules.ProductDataItemsMustNotBeSame(products, request);
+            await _productRules.ProductPriceMustNotBeInvalid(request.Price, request.Discount);
 
             Product product = new Product(request.Title, request.Description, request.Price, request.Discount, request.BrandId);
 
