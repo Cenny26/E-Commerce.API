@@ -1,7 +1,6 @@
 ﻿using ECommerce.Application.Bases;
 using ECommerce.Application.Behaviors;
 using ECommerce.Application.Exceptions;
-using ECommerce.Application.Features.Products.Rules;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
@@ -27,6 +26,7 @@ namespace ECommerce.Application
 
             services.AddTransient<ExceptionMiddleware>();
             services.AddTransient(typeof(IPipelineBehavior<,>), typeof(FluentValidationBehavior<,>));
+            services.AddTransient(typeof(IPipelineBehavior<,>), typeof(RedisCacheBehavior<,>));
         }
 
         private static IServiceCollection AddRulesFromAssemblyContaining(this IServiceCollection services, Assembly assembly, Type type)
