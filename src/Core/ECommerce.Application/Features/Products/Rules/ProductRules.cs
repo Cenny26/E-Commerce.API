@@ -13,5 +13,13 @@ namespace ECommerce.Application.Features.Products.Rules
 
             return Task.CompletedTask;
         }
+
+        public Task ProductMustBeExistsWhenDeleting(Product product, int id)
+        {
+            if (product is null)
+                throw new ProductMustBeExistsWhenDeletingException(id);
+
+            return Task.CompletedTask;
+        }
     }
 }

@@ -17,7 +17,7 @@ namespace ECommerce.Application.Features.Products.Queries.GetAllProducts
 
         public async Task<IList<GetAllProductsQueryResponse>> Handle(GetAllProductsQueryRequest request, CancellationToken cancellationToken)
         {
-            var products = await _unitOfWork.GetReadRepository<Product>().GetAllAsync(include: x => x.Include(b => b.Brand).Include(p => p.ProductCategories).ThenInclude(pc => pc.Category));
+            var products = await _unitOfWork.GetReadRepository<Product>().GetAllAsync(predicate: x => !x.IsDeleted, include: x => x.Include(b => b.Brand).Include(p => p.ProductCategories).ThenInclude(pc => pc.Category));
 
             var responseList = new List<GetAllProductsQueryResponse>();
 
