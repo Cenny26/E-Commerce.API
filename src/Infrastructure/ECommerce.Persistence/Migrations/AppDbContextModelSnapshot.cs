@@ -24,11 +24,9 @@ namespace ECommerce.Persistence.Migrations
 
             modelBuilder.Entity("ECommerce.Domain.Entities.Brand", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -47,34 +45,32 @@ namespace ECommerce.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            CreatedDate = new DateTime(2024, 4, 10, 18, 15, 30, 618, DateTimeKind.Local).AddTicks(4697),
+                            Id = new Guid("bca0cbc5-1cea-4444-b613-4e3b4c42fee0"),
+                            CreatedDate = new DateTime(2024, 4, 18, 22, 41, 19, 593, DateTimeKind.Local).AddTicks(2869),
                             IsDeleted = false,
-                            Name = "Books"
+                            Name = "Acer"
                         },
                         new
                         {
-                            Id = 2,
-                            CreatedDate = new DateTime(2024, 4, 10, 18, 15, 30, 618, DateTimeKind.Local).AddTicks(4708),
+                            Id = new Guid("d772ad17-69ca-442a-ab49-2fcf3e742815"),
+                            CreatedDate = new DateTime(2024, 4, 18, 22, 41, 19, 593, DateTimeKind.Local).AddTicks(2873),
                             IsDeleted = false,
-                            Name = "Toys"
+                            Name = "Apple"
                         },
                         new
                         {
-                            Id = 3,
-                            CreatedDate = new DateTime(2024, 4, 10, 18, 15, 30, 618, DateTimeKind.Local).AddTicks(4766),
-                            IsDeleted = true,
-                            Name = "Jewelery & Garden"
+                            Id = new Guid("4c9cdadf-c178-439f-866c-517f89810fdf"),
+                            CreatedDate = new DateTime(2024, 4, 18, 22, 41, 19, 593, DateTimeKind.Local).AddTicks(2875),
+                            IsDeleted = false,
+                            Name = "Adidas"
                         });
                 });
 
             modelBuilder.Entity("ECommerce.Domain.Entities.Category", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -86,8 +82,8 @@ namespace ECommerce.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("ParentId")
-                        .HasColumnType("int");
+                    b.Property<Guid?>("ParentId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<int>("Priority")
                         .HasColumnType("int");
@@ -99,113 +95,48 @@ namespace ECommerce.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            CreatedDate = new DateTime(2024, 4, 10, 18, 15, 30, 618, DateTimeKind.Local).AddTicks(7739),
+                            Id = new Guid("090f32df-66c3-46f1-92bc-43e4111bfe49"),
+                            CreatedDate = new DateTime(2024, 4, 18, 22, 41, 19, 593, DateTimeKind.Local).AddTicks(4460),
                             IsDeleted = false,
                             Name = "Electronic",
-                            ParentId = 0,
                             Priority = 1
                         },
                         new
                         {
-                            Id = 2,
-                            CreatedDate = new DateTime(2024, 4, 10, 18, 15, 30, 618, DateTimeKind.Local).AddTicks(7742),
+                            Id = new Guid("0cdbef26-5970-4859-9d7c-4a4ffb1cf6b7"),
+                            CreatedDate = new DateTime(2024, 4, 18, 22, 41, 19, 593, DateTimeKind.Local).AddTicks(4463),
                             IsDeleted = false,
                             Name = "Fashion",
-                            ParentId = 0,
                             Priority = 2
                         },
                         new
                         {
-                            Id = 3,
-                            CreatedDate = new DateTime(2024, 4, 10, 18, 15, 30, 618, DateTimeKind.Local).AddTicks(7744),
+                            Id = new Guid("94d99305-797e-4fa5-882f-88a5a4806acd"),
+                            CreatedDate = new DateTime(2024, 4, 18, 22, 41, 19, 593, DateTimeKind.Local).AddTicks(4467),
                             IsDeleted = false,
                             Name = "Computer",
-                            ParentId = 1,
+                            ParentId = new Guid("090f32df-66c3-46f1-92bc-43e4111bfe49"),
                             Priority = 1
                         },
                         new
                         {
-                            Id = 4,
-                            CreatedDate = new DateTime(2024, 4, 10, 18, 15, 30, 618, DateTimeKind.Local).AddTicks(7746),
+                            Id = new Guid("b3d66b61-f1f5-4c13-8018-372999bbff4f"),
+                            CreatedDate = new DateTime(2024, 4, 18, 22, 41, 19, 593, DateTimeKind.Local).AddTicks(4470),
                             IsDeleted = false,
-                            Name = "Woman",
-                            ParentId = 2,
+                            Name = "Shoes",
+                            ParentId = new Guid("0cdbef26-5970-4859-9d7c-4a4ffb1cf6b7"),
                             Priority = 1
-                        });
-                });
-
-            modelBuilder.Entity("ECommerce.Domain.Entities.Detail", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Title")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CategoryId");
-
-                    b.ToTable("Details");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            CategoryId = 1,
-                            CreatedDate = new DateTime(2024, 4, 10, 18, 15, 30, 621, DateTimeKind.Local).AddTicks(1155),
-                            Description = "Molestiae veniam in quod aut.",
-                            IsDeleted = false,
-                            Title = "Eum."
-                        },
-                        new
-                        {
-                            Id = 2,
-                            CategoryId = 3,
-                            CreatedDate = new DateTime(2024, 4, 10, 18, 15, 30, 621, DateTimeKind.Local).AddTicks(1188),
-                            Description = "Unde aut voluptatem.",
-                            IsDeleted = true,
-                            Title = "Libero in."
-                        },
-                        new
-                        {
-                            Id = 3,
-                            CategoryId = 4,
-                            CreatedDate = new DateTime(2024, 4, 10, 18, 15, 30, 621, DateTimeKind.Local).AddTicks(1216),
-                            Description = "Voluptatum nulla ipsum dolorum nemo.",
-                            IsDeleted = false,
-                            Title = "Quidem."
                         });
                 });
 
             modelBuilder.Entity("ECommerce.Domain.Entities.Product", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                        .HasColumnType("uniqueidentifier");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<int>("BrandId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("BrandId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime2");
@@ -236,41 +167,63 @@ namespace ECommerce.Persistence.Migrations
                     b.HasData(
                         new
                         {
-                            Id = 1,
-                            BrandId = 1,
-                            CreatedDate = new DateTime(2024, 4, 10, 18, 15, 30, 624, DateTimeKind.Local).AddTicks(1108),
-                            Description = "The Football Is Good For Training And Recreational Purposes",
-                            Discount = 4.44718725695930m,
+                            Id = new Guid("9b710ac8-a0f1-428d-a1b3-66ffa49890b8"),
+                            BrandId = new Guid("bca0cbc5-1cea-4444-b613-4e3b4c42fee0"),
+                            CreatedDate = new DateTime(2024, 4, 18, 22, 41, 19, 594, DateTimeKind.Local).AddTicks(1935),
+                            Description = "Elevate your gaming adventure with the Acer Nitro V 15, your gateway to an adrenaline-charged journey. This laptop is the perfect blend of power and style, pushing the boundaries of what’s possible on a laptop.",
+                            Discount = 10m,
                             IsDeleted = false,
-                            Price = 398.30m,
-                            Title = "Intelligent Wooden Shirt"
+                            Price = 1200m,
+                            Title = "Acer Nitro V 15"
                         },
                         new
                         {
-                            Id = 2,
-                            BrandId = 3,
-                            CreatedDate = new DateTime(2024, 4, 10, 18, 15, 30, 624, DateTimeKind.Local).AddTicks(1138),
-                            Description = "The Nagasaki Lander is the trademarked name of several series of Nagasaki sport bikes, that started with the 1984 ABC800J",
-                            Discount = 3.609590333924480m,
+                            Id = new Guid("d750be8a-97b3-48c1-a72d-ac55c880935b"),
+                            BrandId = new Guid("4c9cdadf-c178-439f-866c-517f89810fdf"),
+                            CreatedDate = new DateTime(2024, 4, 18, 22, 41, 19, 594, DateTimeKind.Local).AddTicks(1940),
+                            Description = "These wide fit adidas shoes are crafted with a Cloudfoam midsole and cushioned sockliner for a light and springy feel. They're inspired by running shoes, but work just as well for juggling daily tasks as they do for jogging.",
+                            Discount = 20m,
                             IsDeleted = false,
-                            Price = 712.17m,
-                            Title = "Handmade Metal Salad"
+                            Price = 100m,
+                            Title = "Lite Racer Adapt 5.0"
                         });
                 });
 
             modelBuilder.Entity("ECommerce.Domain.Entities.ProductCategory", b =>
                 {
-                    b.Property<int>("ProductId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("ProductId")
+                        .HasColumnType("uniqueidentifier");
 
-                    b.Property<int>("CategoryId")
-                        .HasColumnType("int");
+                    b.Property<Guid>("CategoryId")
+                        .HasColumnType("uniqueidentifier");
 
                     b.HasKey("ProductId", "CategoryId");
 
                     b.HasIndex("CategoryId");
 
                     b.ToTable("ProductCategories");
+
+                    b.HasData(
+                        new
+                        {
+                            ProductId = new Guid("9b710ac8-a0f1-428d-a1b3-66ffa49890b8"),
+                            CategoryId = new Guid("090f32df-66c3-46f1-92bc-43e4111bfe49")
+                        },
+                        new
+                        {
+                            ProductId = new Guid("9b710ac8-a0f1-428d-a1b3-66ffa49890b8"),
+                            CategoryId = new Guid("94d99305-797e-4fa5-882f-88a5a4806acd")
+                        },
+                        new
+                        {
+                            ProductId = new Guid("d750be8a-97b3-48c1-a72d-ac55c880935b"),
+                            CategoryId = new Guid("0cdbef26-5970-4859-9d7c-4a4ffb1cf6b7")
+                        },
+                        new
+                        {
+                            ProductId = new Guid("d750be8a-97b3-48c1-a72d-ac55c880935b"),
+                            CategoryId = new Guid("b3d66b61-f1f5-4c13-8018-372999bbff4f")
+                        });
                 });
 
             modelBuilder.Entity("ECommerce.Domain.Entities.Role", b =>
@@ -480,17 +433,6 @@ namespace ECommerce.Persistence.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
-            modelBuilder.Entity("ECommerce.Domain.Entities.Detail", b =>
-                {
-                    b.HasOne("ECommerce.Domain.Entities.Category", "Category")
-                        .WithMany("Details")
-                        .HasForeignKey("CategoryId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Category");
-                });
-
             modelBuilder.Entity("ECommerce.Domain.Entities.Product", b =>
                 {
                     b.HasOne("ECommerce.Domain.Entities.Brand", "Brand")
@@ -574,8 +516,6 @@ namespace ECommerce.Persistence.Migrations
 
             modelBuilder.Entity("ECommerce.Domain.Entities.Category", b =>
                 {
-                    b.Navigation("Details");
-
                     b.Navigation("ProductCategories");
                 });
 

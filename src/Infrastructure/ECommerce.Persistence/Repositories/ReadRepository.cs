@@ -1,9 +1,7 @@
 ﻿using ECommerce.Application.Interfaces.Repositories;
 using ECommerce.Domain.Common;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Microsoft.EntityFrameworkCore.Query;
-using System.Linq;
 using System.Linq.Expressions;
 
 namespace ECommerce.Persistence.Repositories
