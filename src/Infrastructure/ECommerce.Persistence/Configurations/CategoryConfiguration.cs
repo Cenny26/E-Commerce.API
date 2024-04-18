@@ -10,8 +10,7 @@ namespace ECommerce.Persistence.Configurations
         {
             builder.HasData(new Category()
             {
-                Id = 1,
-                ParentId = 0,
+                Id = Guid.Parse("090F32DF-66C3-46F1-92BC-43E4111BFE49"),
                 Name = "Electronic",
                 Priority = 1,
                 CreatedDate = DateTime.Now,
@@ -19,8 +18,7 @@ namespace ECommerce.Persistence.Configurations
             },
             new Category()
             {
-                Id = 2,
-                ParentId = 0,
+                Id = Guid.Parse("0CDBEF26-5970-4859-9D7C-4A4FFB1CF6B7"),
                 Name = "Fashion",
                 Priority = 2,
                 CreatedDate = DateTime.Now,
@@ -28,8 +26,8 @@ namespace ECommerce.Persistence.Configurations
             },
             new Category()
             {
-                Id = 3,
-                ParentId = 1,
+                Id = Guid.Parse("94D99305-797E-4FA5-882F-88A5A4806ACD"),
+                ParentId = Guid.Parse("090F32DF-66C3-46F1-92BC-43E4111BFE49"),
                 Name = "Computer",
                 Priority = 1,
                 CreatedDate = DateTime.Now,
@@ -37,9 +35,9 @@ namespace ECommerce.Persistence.Configurations
             },
             new Category()
             {
-                Id = 4,
-                ParentId = 2,
-                Name = "Woman",
+                Id = Guid.Parse("B3D66B61-F1F5-4C13-8018-372999BBFF4F"),
+                ParentId = Guid.Parse("0CDBEF26-5970-4859-9D7C-4A4FFB1CF6B7"),
+                Name = "Shoes",
                 Priority = 1,
                 CreatedDate = DateTime.Now,
                 IsDeleted = false

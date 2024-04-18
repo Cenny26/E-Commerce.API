@@ -8,7 +8,7 @@ namespace ECommerce.Application.Features.Products.Commands.CreateProduct
         public string Description { get; set; }
         public decimal Price { get; set; }
         public decimal Discount { get; set; }
-        public int BrandId { get; set; }
-        public IList<int> CategoryIds { get; set; }
+        public Guid BrandId { get; set; }
+        public IList<Guid> CategoryIds { get; set; }
     }
 }

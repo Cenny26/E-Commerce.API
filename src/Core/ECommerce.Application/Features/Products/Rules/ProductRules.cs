@@ -38,7 +38,7 @@ namespace ECommerce.Application.Features.Products.Rules
             return Task.CompletedTask;
         }
 
-        public async Task EnsureBrandExists(int brandId)
+        public async Task EnsureBrandExists(Guid brandId)
         {
             var brand = await _unitOfWork.GetReadRepository<Brand>().GetAsync(x => x.Id == brandId);
             if (brand is null)
@@ -47,9 +47,9 @@ namespace ECommerce.Application.Features.Products.Rules
             await Task.CompletedTask;
         }
 
-        public async Task EnsureCategoriesExist(IList<int> categoryIds)
+        public async Task EnsureCategoriesExist(IList<Guid> categoryIds)
         {
-            List<int> notFoundCategoryIds = new List<int>();
+            List<Guid> notFoundCategoryIds = new List<Guid>();
 
             foreach (var categoryId in categoryIds)
             {
@@ -64,7 +64,7 @@ namespace ECommerce.Application.Features.Products.Rules
             await Task.CompletedTask;
         }
 
-        public Task ProductMustBeExistsWhenDeleting(Product product, int id)
+        public Task ProductMustBeExistsWhenDeleting(Product product, Guid id)
         {
             if (product is null)
                 throw new ProductMustBeExistsWhenDeletingException(id);
@@ -72,7 +72,7 @@ namespace ECommerce.Application.Features.Products.Rules
             return Task.CompletedTask;
         }
 
-        public Task ProductMustBeExistsWhenUpdating(Product product, int id)
+        public Task ProductMustBeExistsWhenUpdating(Product product, Guid id)
         {
             if (product is null)
                 throw new ProductMustBeExistsWhenUpdatingException(id);
