@@ -33,9 +33,7 @@ namespace ECommerce.Application.Features.Products.Rules
         {
             decimal discountedPrice = price - (price * discount / 100);
             if (discountedPrice < 0)
-            {
                 throw new ProductPriceMustNotBeInvalidException();
-            }
 
             return Task.CompletedTask;
         }
@@ -43,10 +41,8 @@ namespace ECommerce.Application.Features.Products.Rules
         public async Task EnsureBrandExists(int brandId)
         {
             var brand = await _unitOfWork.GetReadRepository<Brand>().GetAsync(x => x.Id == brandId);
-            if (brand == null)
-            {
+            if (brand is null)
                 throw new EnsureBrandExistsException(brandId);
-            }
 
             await Task.CompletedTask;
         }
@@ -58,16 +54,12 @@ namespace ECommerce.Application.Features.Products.Rules
             foreach (var categoryId in categoryIds)
             {
                 var category = await _unitOfWork.GetReadRepository<Category>().GetAsync(x => x.Id == categoryId);
-                if (category == null)
-                {
+                if (category is null)
                     notFoundCategoryIds.Add(categoryId);
-                }
             }
 
             if (notFoundCategoryIds.Any())
-            {
                 throw new EnsureCategoryExistsException(notFoundCategoryIds);
-            }
 
             await Task.CompletedTask;
         }
@@ -76,6 +68,14 @@ namespace ECommerce.Application.Features.Products.Rules
         {
             if (product is null)
                 throw new ProductMustBeExistsWhenDeletingException(id);
+
+            return Task.CompletedTask;
+        }
+
+        public Task ProductMustBeExistsWhenUpdating(Product product, int id)
+        {
+            if (product is null)
+                throw new ProductMustBeExistsWhenUpdatingException(id);
 
             return Task.CompletedTask;
         }
