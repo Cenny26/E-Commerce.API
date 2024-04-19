@@ -19,7 +19,7 @@ namespace ECommerce.Application.Features.Products.Commands.DeleteProduct
         public async Task<Unit> Handle(DeleteProductCommandRequest request, CancellationToken cancellationToken)
         {
             var product = await _unitOfWork.GetReadRepository<Product>().GetAsync(x => x.Id == request.Id && !x.IsDeleted);
-            await _productRules.ProductMustBeExistsWhenDeleting(product, request.Id);
+            await _productRules.EnsureProductExists(product, request.Id);
 
             product.IsDeleted = true;
 

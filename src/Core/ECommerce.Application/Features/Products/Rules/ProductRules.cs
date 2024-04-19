@@ -71,21 +71,5 @@ namespace ECommerce.Application.Features.Products.Rules
 
             await Task.CompletedTask;
         }
-
-        public Task ProductMustBeExistsWhenDeleting(Product product, Guid id)
-        {
-            if (product is null)
-                throw new ProductMustBeExistsWhenDeletingException(id);
-
-            return Task.CompletedTask;
-        }
-
-        public Task ProductMustBeExistsWhenUpdating(Product product, Guid id)
-        {
-            if (product is null)
-                throw new ProductMustBeExistsWhenUpdatingException(id);
-
-            return Task.CompletedTask;
-        }
     }
 }

@@ -20,7 +20,7 @@ namespace ECommerce.Application.Features.Products.Commands.UpdateProduct
         {
             var product = await _unitOfWork.GetReadRepository<Product>().GetAsync(x => x.Id == request.Id && !x.IsDeleted);
 
-            await _productRules.ProductMustBeExistsWhenUpdating(product, request.Id);
+            await _productRules.EnsureProductExists(product, request.Id);
             await _productRules.EnsureBrandExists(brandId: request.BrandId);
             await _productRules.EnsureCategoriesExist(categoryIds: request.CategoryIds);
             await _productRules.ProductPriceMustNotBeInvalid(request.Price, request.Discount);

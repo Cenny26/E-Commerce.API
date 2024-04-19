@@ -7,29 +7,37 @@ namespace ECommerce.Application.Features.Products.Commands.CreateProduct
         public CreateProductCommandValidator()
         {
             RuleFor(x => x.Title)
-                .NotEmpty()
+                .NotEmpty().WithMessage("Title is required.")
                 .WithName("Title");
 
             RuleFor(x => x.Description)
-                .NotEmpty()
+                .NotEmpty().WithMessage("Description is required.")
                 .WithName("Description");
 
             RuleFor(x => x.BrandId)
-                .NotEmpty()
+                .NotEmpty().WithMessage("Brand's identity is required.")
+                .Must(BeValidGuid).WithMessage("Invalid format for identity.")
                 .WithName("Brand's identity");
 
             RuleFor(x => x.Price)
-                .GreaterThan(0)
+                .NotEmpty().WithMessage("Price is required.")
+                .GreaterThan(0).WithMessage("Price must be greater than 0.")
                 .WithName("Price");
 
             RuleFor(x => x.Discount)
-                .InclusiveBetween(0, 100)
+                .NotEmpty().WithMessage("Discount is required.")
+                .InclusiveBetween(0, 100).WithMessage("Discount must be between 0 and 100.")
                 .WithName("Discount");
 
             RuleFor(x => x.CategoryIds)
-                .NotEmpty()
-                .WithMessage("At least one category must be selected.")
+                .NotEmpty().WithMessage("Categories' identity is required.")
+                .Must(ids => ids.All(BeValidGuid)).WithMessage("Invalid format for identity.")
                 .WithName("Categories' identity");
+        }
+
+        private bool BeValidGuid(Guid id)
+        {
+            return id != Guid.Empty;
         }
     }
 }
