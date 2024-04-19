@@ -14,6 +14,14 @@ namespace ECommerce.Application.Features.Products.Rules
             _unitOfWork = unitOfWork;
         }
 
+        public async Task EnsureProductExists(Product product, Guid productId)
+        {
+            if (product is null)
+                throw new EnsureProductExistsException(productId);
+
+            await Task.CompletedTask;
+        }
+
         public Task ProductDataItemsMustNotBeSame(IList<Product> products, CreateProductCommandRequest request)
         {
             if (products.Any(x =>

@@ -1,11 +1,10 @@
 ﻿using ECommerce.Application.DTOs.Brand;
 using ECommerce.Application.DTOs.Category;
 
-namespace ECommerce.Application.Features.Products.Queries.GetAllProducts
+namespace ECommerce.Application.Features.Products.Queries.GetProductByGuid
 {
-    public class GetAllProductsQueryResponse
+    public class GetProductByGuidQueryResponse
     {
-        public Guid Id { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public BrandDto Brand { get; set; }

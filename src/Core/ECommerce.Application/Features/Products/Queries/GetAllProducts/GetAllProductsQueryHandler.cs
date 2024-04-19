@@ -25,11 +25,12 @@ namespace ECommerce.Application.Features.Products.Queries.GetAllProducts
             {
                 var response = new GetAllProductsQueryResponse
                 {
+                    Id = product.Id,
                     Title = product.Title,
                     Description = product.Description,
+                    Brand = new BrandDto { Name = product.Brand.Name },
                     Price = product.Price - (product.Price * product.Discount / 100),
                     Discount = product.Discount,
-                    Brand = new BrandDto { Name = product.Brand.Name }
                 };
 
                 var categoryNames = product.ProductCategories.Select(pc => pc.Category.Name).ToList();
